@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P.COFFEE ROASTERS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#F7F2EA;--brown:#3D2B1F;--mid:#7A5C48;--light:#C4A882;--sand:#EDE4D3;
+  --white:#FDFAF5;--text:#2C1F14;--muted:#8C7060;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--text);font-weight:300}
+a{text-decoration:none;color:inherit}
+
+#loading{position:fixed;inset:0;background:var(--cream);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem}
+#loading .logo{font-family:'Playfair Display',serif;font-size:1.2rem;letter-spacing:0.2em;color:var(--brown)}
+#loading .dot{width:6px;height:6px;border-radius:50%;background:var(--light);animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1)}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,242,234,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(61,43,31,0.1);padding:0 2rem}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;letter-spacing:0.15em;color:var(--brown)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.78rem;letter-spacing:0.12em;color:var(--mid);transition:color 0.2s}
+.nav-links a:hover{color:var(--brown)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:1.5px;background:var(--brown)}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--cream);border-bottom:1px solid rgba(61,43,31,0.1);padding:1.5rem 2rem;z-index:99}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:0.75rem 0;font-size:0.9rem;letter-spacing:0.1em;color:var(--mid);border-bottom:1px solid rgba(61,43,31,0.08)}
+
+section{scroll-margin-top:64px}
+
+#home{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--cream);position:relative;overflow:hidden;padding:80px 2rem 2rem}
+.hero-bg{position:absolute;inset:0;opacity:0.04}
+.hero-bg svg{width:100%;height:100%}
+.hero-content{text-align:center;max-width:600px;position:relative;z-index:1}
+.hero-eyebrow{font-size:0.72rem;letter-spacing:0.3em;color:var(--light);margin-bottom:1.5rem;text-transform:uppercase}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,8vw,5rem);line-height:1.05;color:var(--brown);margin-bottom:0.3rem}
+.hero-subtitle{font-family:'Playfair Display',serif;font-size:clamp(1rem,3vw,1.4rem);color:var(--mid);font-style:italic;margin-bottom:2rem}
+.hero-divider{width:40px;height:1px;background:var(--light);margin:0 auto 2rem}
+.hero-desc{font-size:0.88rem;line-height:1.9;color:var(--muted);letter-spacing:0.05em;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{padding:0.75rem 2rem;background:var(--brown);color:var(--cream);font-size:0.78rem;letter-spacing:0.15em;border:none;cursor:pointer;transition:background 0.2s}
+.btn-outline{padding:0.75rem 2rem;background:transparent;color:var(--brown);font-size:0.78rem;letter-spacing:0.15em;border:1px solid var(--brown);cursor:pointer;transition:all 0.2s}
+.btn-primary:hover{background:var(--mid)}
+.btn-outline:hover{background:var(--brown);color:var(--cream)}
+.hero-img{margin-top:3rem;width:100%;max-width:500px;height:300px;background:var(--sand);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.8rem;letter-spacing:0.1em;border:1px solid rgba(61,43,31,0.1);overflow:hidden}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+
+.section-wrap{max-width:1100px;margin:0 auto;padding:5rem 2rem}
+.section-label{font-size:0.7rem;letter-spacing:0.3em;color:var(--light);text-transform:uppercase;margin-bottom:0.75rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);color:var(--brown);margin-bottom:1rem}
+.section-line{width:32px;height:1px;background:var(--light);margin-bottom:2.5rem}
+
+#about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-img{height:420px;background:var(--sand);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.8rem;letter-spacing:0.1em;border:1px solid rgba(61,43,31,0.08);overflow:hidden}
+.about-img img{width:100%;height:100%;object-fit:cover}
+.about-text p{font-size:0.9rem;line-height:2;color:var(--muted);margin-bottom:1.2rem}
+.about-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
+.tag{font-size:0.72rem;letter-spacing:0.12em;padding:0.4rem 0.9rem;border:1px solid var(--light);color:var(--mid)}
+
+#menu{background:var(--cream)}
+.menu-tabs{display:flex;gap:0;margin-bottom:2.5rem;border-bottom:1px solid rgba(61,43,31,0.15);overflow-x:auto}
+.tab-btn{padding:0.75rem 1.5rem;background:none;border:none;font-size:0.78rem;letter-spacing:0.12em;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;font-family:'Noto Sans TC',sans-serif;white-space:nowrap}
+.tab-btn.active{color:var(--brown);border-bottom-color:var(--brown)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem}
+.menu-card{background:var(--white);padding:1.5rem;border:1px solid rgba(61,43,31,0.08);transition:border-color 0.2s}
+.menu-card:hover{border-color:var(--light)}
+.menu-card-img{width:100%;height:160px;background:var(--sand);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.75rem;letter-spacing:0.08em;margin-bottom:1rem;overflow:hidden}
+.menu-card-img img{width:100%;height:100%;object-fit:cover}
+.menu-card-name{font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown);margin-bottom:0.3rem}
+.menu-card-desc{font-size:0.78rem;color:var(--muted);line-height:1.7;margin-bottom:0.75rem}
+.menu-card-price{font-size:0.82rem;color:var(--mid);letter-spacing:0.05em}
+.menu-section{display:none}
+.menu-section.active{display:block}
+
+#courses{background:var(--sand)}
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.course-card{background:var(--white);border:1px solid rgba(61,43,31,0.08)}
+.course-img{width:100%;height:200px;background:var(--cream);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.78rem;letter-spacing:0.08em;overflow:hidden}
+.course-img img{width:100%;height:100%;object-fit:cover}
+.course-body{padding:1.5rem}
+.course-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--brown);margin-bottom:0.5rem}
+.course-meta{font-size:0.75rem;color:var(--muted);margin-bottom:0.75rem;line-height:1.8}
+.course-price{font-size:0.85rem;color:var(--mid);margin-bottom:1rem}
+.btn-small{display:inline-block;padding:0.55rem 1.3rem;background:var(--brown);color:var(--cream);font-size:0.72rem;letter-spacing:0.12em;border:none;cursor:pointer;transition:background 0.2s;font-family:'Noto Sans TC',sans-serif}
+.btn-small:hover{background:var(--mid)}
+
+#shop{background:var(--white)}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem}
+.shop-card{background:var(--cream);border:1px solid rgba(61,43,31,0.08);transition:all 0.2s;cursor:pointer}
+.shop-card:hover{border-color:var(--light)}
+.shop-img{width:100%;height:220px;background:var(--sand);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.75rem;letter-spacing:0.08em;overflow:hidden}
+.shop-img img{width:100%;height:100%;object-fit:cover}
+.shop-body{padding:1.2rem}
+.shop-name{font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--brown);margin-bottom:0.3rem}
+.shop-sub{font-size:0.75rem;color:var(--muted);margin-bottom:0.5rem}
+.shop-price{font-size:0.82rem;color:var(--mid)}
+.shop-badge{display:inline-block;font-size:0.65rem;letter-spacing:0.1em;padding:0.2rem 0.6rem;background:var(--brown);color:var(--cream);margin-bottom:0.5rem}
+
+#contact{background:var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-info{font-size:0.88rem;line-height:1.9;color:var(--muted)}
+.contact-info h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown);margin-bottom:0.5rem;margin-top:1.5rem}
+.contact-info h3:first-child{margin-top:0}
+.map-wrap{width:100%;height:320px;border:1px solid rgba(61,43,31,0.1);overflow:hidden}
+.map-wrap iframe{width:100%;height:100%;border:none}
+
+footer{background:var(--brown);color:var(--cream);padding:3rem 2rem;text-align:center}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;letter-spacing:0.2em;margin-bottom:0.5rem}
+.footer-sub{font-size:0.72rem;letter-spacing:0.15em;opacity:0.5;margin-bottom:1.5rem}
+.footer-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.footer-links a{font-size:0.72rem;letter-spacing:0.1em;opacity:0.6;transition:opacity 0.2s}
+.footer-links a:hover{opacity:1}
+.footer-copy{font-size:0.7rem;opacity:0.35;letter-spacing:0.08em}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .about-img{height:260px}
+}
+</style>
+</head>
+<body>
+
+<div id="loading">
+  <div class="logo">P.COFFEE ROASTERS</div>
+  <div class="dot"></div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">P.COFFEE ROASTERS</a>
+    <ul class="nav-links">
+      <li><a href="#about">關於我們</a></li>
+      <li><a href="#menu">菜單</a></li>
+      <li><a href="#courses">花藝課程</a></li>
+      <li><a href="#shop">選物</a></li>
+      <li><a href="#contact">聯絡</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">關於我們</a>
+  <a href="#menu" onclick="closeMenu()">菜單</a>
+  <a href="#courses" onclick="closeMenu()">花藝課程</a>
+  <a href="#shop" onclick="closeMenu()">選物</a>
+  <a href="#contact" onclick="closeMenu()">聯絡</a>
+</div>
+
+<section id="home">
+  <div class="hero-bg"><svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"><circle cx="200" cy="150" r="300" fill="#3D2B1F"/><circle cx="1000" cy="600" r="250" fill="#3D2B1F"/></svg></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Specialty Coffee & Floral Studio</p>
+    <h1 class="hero-title">P.COFFEE ROASTERS</h1>
+    <p class="hero-subtitle" id="heroSlogan"></p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc" id="heroDesc"></p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">查看菜單</button>
+      <button class="btn-outline" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">課程報名</button>
+    </div>
+    <div class="hero-img" id="heroImg">[ 店內空間照片 ]</div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-wrap">
+    <div class="about-grid">
+      <div class="about-img" id="aboutImg">[ 品牌形象照 ]</div>
+      <div>
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">關於 P.COFFEE</h2>
+        <div class="section-line"></div>
+        <div class="about-text">
+          <p>P.COFFEE ROASTERS 誕生於對咖啡的純粹熱愛，我們相信一杯好咖啡，可以讓忙碌的日常慢下來。</p>
+          <p>店面坐落於台北文山區，藤編椅、木質桌面與自然光，構成了我們獨有的日系文青氛圍。除了自家烘焙的精品咖啡，我們也提供花藝工作坊，邀請你走進花與咖啡香並存的空間。</p>
+          <p>每一批豆子，我們都親自杯測、親自烘焙，只為找到最適合它的曲線。</p>
+        </div>
+        <div class="about-tags">
+          <span class="tag">自家烘焙</span><span class="tag">精品咖啡</span>
+          <span class="tag">花藝工作坊</span><span class="tag">文山區</span><span class="tag">日系風格</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="section-wrap">
+    <p class="section-label">Menu</p>
+    <h2 class="section-title">菜單</h2>
+    <div class="section-line"></div>
+    <div class="menu-tabs" id="menuTabs"></div>
+    <div id="menuContent"></div>
+  </div>
+</section>
+
+<section id="courses">
+  <div class="section-wrap">
+    <p class="section-label">Workshop</p>
+    <h2 class="section-title">花藝課程</h2>
+    <div class="section-line"></div>
+    <div class="courses-grid" id="coursesGrid"></div>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="section-wrap">
+    <p class="section-label">Our Selection</p>
+    <h2 class="section-title">選物店</h2>
+    <div class="section-line"></div>
+    <div class="shop-grid" id="shopGrid"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-wrap">
+    <p class="section-label">Visit Us</p>
+    <h2 class="section-title">找到我們</h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>地址</h3><p id="contactAddr"></p>
+        <h3>營業時間</h3><p id="contactHours"></p>
+        <h3>聯絡方式</h3><p id="contactTel"></p><p id="contactIg"></p>
+      </div>
+      <div class="map-wrap">
+        <iframe src="https://maps.google.com/maps?q=台北市文山區羅斯福路六段231號&output=embed" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">P.COFFEE ROASTERS</div>
+    <div class="footer-sub">Specialty Coffee & Floral Studio · Wenshan, Taipei</div>
+    <div class="footer-links">
+      <a href="#about">關於我們</a><a href="#menu">菜單</a>
+      <a href="#courses">花藝課程</a><a href="#shop">選物</a><a href="#contact">聯絡</a>
+    </div>
+    <div class="footer-copy">© 2025 P.COFFEE ROASTERS. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+const API = "https://sheetdb.io/api/v1/aggloxhcktwxs";
+
+function imgEl(url, placeholder) {
+  if (url && url !== "（貼上圖片網址）") {
+    return `<img src="${url}" alt="${placeholder}" loading="lazy">`;
+  }
+  return placeholder;
+}
+
+async function fetchSheet(sheet) {
+  const r = await fetch(`${API}?sheet=${sheet}`);
+  return r.json();
+}
+
+async function init() {
+  try {
+    const [infoRows, menuRows, courseRows, shopRows, imageRows] = await Promise.all([
+      fetchSheet("info"), fetchSheet("menu"), fetchSheet("courses"),
+      fetchSheet("shop"), fetchSheet("images"),
+    ]);
+
+    const info = {};
+    infoRows.forEach(r => { info[r.key] = r.value; });
+    const images = {};
+    imageRows.forEach(r => { images[r.key] = r.url; });
+
+    document.getElementById("heroSlogan").textContent = info.slogan || "";
+    document.getElementById("heroDesc").textContent = info.desc || "";
+    document.getElementById("contactAddr").textContent = info.address || "";
+    document.getElementById("contactHours").innerHTML =
+      [info.hours, info.hours2, info.hours3].filter(Boolean).join("<br>");
+    document.getElementById("contactTel").textContent = "電話：" + (info.tel || "");
+    document.getElementById("contactIg").textContent = "Instagram：" + (info.ig || "");
+
+    const heroImg = document.getElementById("heroImg");
+    heroImg.innerHTML = imgEl(images.hero, "[ 店內空間照片 ]");
+    const aboutImg = document.getElementById("aboutImg");
+    aboutImg.innerHTML = imgEl(images.about, "[ 品牌形象照 ]");
+
+    const cats = [...new Set(menuRows.map(r => r.category))];
+    const tabs = document.getElementById("menuTabs");
+    const content = document.getElementById("menuContent");
+    cats.forEach((cat, i) => {
+      const btn = document.createElement("button");
+      btn.className = "tab-btn" + (i === 0 ? " active" : "");
+      btn.textContent = cat;
+      btn.onclick = () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".menu-section").forEach(s => s.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("ms-" + i).classList.add("active");
+      };
+      tabs.appendChild(btn);
+      const sec = document.createElement("div");
+      sec.className = "menu-section" + (i === 0 ? " active" : "");
+      sec.id = "ms-" + i;
+      const grid = document.createElement("div");
+      grid.className = "menu-grid";
+      menuRows.filter(r => r.category === cat).forEach(item => {
+        grid.innerHTML += `<div class="menu-card">
+          <div class="menu-card-img">${imgEl(images["menu_" + cat], "[ 飲品照片 ]")}</div>
+          <div class="menu-card-name">${item.name}</div>
+          <div class="menu-card-desc">${item.desc}</div>
+          <div class="menu-card-price">${item.price}</div>
+        </div>`;
+      });
+      sec.appendChild(grid);
+      content.appendChild(sec);
+    });
+
+    const cg = document.getElementById("coursesGrid");
+    courseRows.forEach((c, i) => {
+      cg.innerHTML += `<div class="course-card">
+        <div class="course-img">${imgEl(images["course_" + (i+1)], "[ 課程照片 ]")}</div>
+        <div class="course-body">
+          <div class="course-title">${c.title}</div>
+          <div class="course-meta">📅 ${c.date}<br>⏱ ${c.duration}　👥 ${c.size}</div>
+          <div class="course-price">${c.price} / 人</div>
+          <button class="btn-small">立即報名</button>
+        </div>
+      </div>`;
+    });
+
+    const sg = document.getElementById("shopGrid");
+    shopRows.forEach(p => {
+      sg.innerHTML += `<div class="shop-card">
+        <div class="shop-img">${imgEl(images["shop_" + p.name], "[ 商品照片 ]")}</div>
+        <div class="shop-body">
+          ${p.badge ? `<div class="shop-badge">${p.badge}</div><br>` : ""}
+          <div class="shop-name">${p.name}</div>
+          <div class="shop-sub">${p.sub}</div>
+          <div class="shop-price">${p.price}</div>
+        </div>
+      </div>`;
+    });
+
+  } catch(e) {
+    console.error("資料載入失敗", e);
+  } finally {
+    document.getElementById("loading").style.display = "none";
+  }
+}
+
+function toggleMenu() { document.getElementById("mobileMenu").classList.toggle("open"); }
+function closeMenu() { document.getElementById("mobileMenu").classList.remove("open"); }
+
+init();
+</script>
+</body>
+</html>
