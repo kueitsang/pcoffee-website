@@ -89,6 +89,9 @@ section{scroll-margin-top:64px}
 .course-price{font-size:0.85rem;color:var(--mid);margin-bottom:1rem}
 .btn-small{display:inline-block;padding:0.55rem 1.3rem;background:var(--brown);color:var(--cream);font-size:0.72rem;letter-spacing:0.12em;border:none;cursor:pointer;transition:background 0.2s;font-family:'Noto Sans TC',sans-serif}
 .btn-small:hover{background:var(--mid)}
+.coming-soon-btn{background:var(--muted);cursor:not-allowed;opacity:0.7}
+.coming-soon-btn:hover{background:var(--muted)}
+.shop-link-hint{font-size:0.68rem;letter-spacing:0.08em;color:var(--cream);background:var(--mid);padding:0.3rem 0.75rem;text-align:center}
 
 #shop{background:var(--white)}
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem}
@@ -256,10 +259,18 @@ footer{background:var(--brown);color:var(--cream);padding:3rem 2rem;text-align:c
 <script>
 const API = "https://sheetdb.io/api/v1/aggloxhcktwxs";
 
+const SHOP_URL = "https://myship.7-11.com.tw/general/detail/GM2307100861829";
+
+function convertDriveUrl(url) {
+  if (!url || url === "（貼上圖片網址）") return null;
+  const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (m) return `https://drive.google.com/thumbnail?id=${m[1]}&sz=w800`;
+  return url;
+}
+
 function imgEl(url, placeholder) {
-  if (url && url !== "（貼上圖片網址）") {
-    return `<img src="${url}" alt="${placeholder}" loading="lazy">`;
-  }
+  const src = convertDriveUrl(url);
+  if (src) return `<img src="${src}" alt="${placeholder}" loading="lazy">`;
   return placeholder;
 }
 
@@ -332,14 +343,17 @@ async function init() {
           <div class="course-title">${c.title}</div>
           <div class="course-meta">📅 ${c.date}<br>⏱ ${c.duration}　👥 ${c.size}</div>
           <div class="course-price">${c.price} / 人</div>
-          <button class="btn-small">立即報名</button>
+          <button class="btn-small coming-soon-btn" disabled>Coming Soon...</button>
         </div>
       </div>`;
     });
 
     const sg = document.getElementById("shopGrid");
     shopRows.forEach(p => {
-      sg.innerHTML += `<div class="shop-card">
+      const isBean = p.sub.includes("烘焙") || p.name.toLowerCase().includes("coffee") || p.name.includes("濾掛");
+      const cardAttr = isBean ? `onclick="window.open('${SHOP_URL}','_blank')" style="cursor:pointer"` : "";
+      sg.innerHTML += `<div class="shop-card" ${cardAttr}>
+        ${isBean ? `<div class="shop-link-hint">點擊前往 7-11 賣貨便訂購 ↗</div>` : ""}
         <div class="shop-img">${imgEl(images["shop_" + p.name], "[ 商品照片 ]")}</div>
         <div class="shop-body">
           ${p.badge ? `<div class="shop-badge">${p.badge}</div><br>` : ""}
