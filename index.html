@@ -366,7 +366,7 @@ async function init() {
       grid.className = "menu-grid";
       menuRows.filter(r => r.category === cat).forEach(item => {
         grid.innerHTML += `<div class="menu-card">
-          <div class="menu-card-img">${imgEl(images["menu_" + cat], "[ 飲品照片 ]")}</div>
+          <div class="menu-card-img">${imgEl(item.image, "[ 飲品照片 ]")}</div>
           <div class="menu-card-name">${item.name}</div>
           <div class="menu-card-desc">${item.desc}</div>
           <div class="menu-card-price">${item.price}</div>
@@ -384,7 +384,7 @@ async function init() {
       const clickAttr = orderable ? `onclick="window.open('${SHOP_URL}','_blank')"` : "";
       sg.innerHTML += `<div class="${cardClass}" ${clickAttr}>
         ${orderable ? `<div class="shop-hint">點擊前往 7-11 賣貨便訂購 ↗</div>` : ""}
-        <div class="shop-img">${imgEl(images["shop_" + p.name], "[ 商品照片 ]")}</div>
+        <div class="shop-img">${imgEl(p.image, "[ 商品照片 ]")}</div>
         <div class="shop-body">
           ${p.badge ? `<div class="shop-badge">${p.badge}</div><br>` : ""}
           <div class="shop-name">${p.name}</div>
