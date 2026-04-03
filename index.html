@@ -21,6 +21,8 @@ a{text-decoration:none;color:inherit}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,242,234,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(61,43,31,0.1);padding:0 2rem}
 .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo-wrap{display:flex;align-items:center;gap:10px}
+.nav-logo-img{height:32px;width:auto;object-fit:contain;filter:brightness(0) saturate(100%) invert(14%) sepia(20%) saturate(800%) hue-rotate(340deg)}
 .nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;letter-spacing:0.15em;color:var(--brown)}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{font-size:0.78rem;letter-spacing:0.12em;color:var(--mid);transition:color 0.2s}
@@ -38,13 +40,20 @@ section{scroll-margin-top:64px}
 .hero-bg svg{width:100%;height:100%}
 .hero-content{text-align:center;max-width:600px;position:relative;z-index:1}
 .hero-eyebrow{font-size:0.72rem;letter-spacing:0.3em;color:var(--light);margin-bottom:1.5rem;text-transform:uppercase}
-.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,8vw,5rem);line-height:1.05;color:var(--brown);margin-bottom:0.3rem}
-.hero-subtitle{font-family:'Playfair Display',serif;font-size:clamp(1rem,3vw,1.4rem);color:var(--mid);font-style:italic;margin-bottom:2rem}
-.hero-divider{width:40px;height:1px;background:var(--light);margin:0 auto 2rem}
+
+/* Logo 區塊 */
+.hero-logo-wrap{display:flex;align-items:center;justify-content:center;gap:1.2rem;margin-bottom:1.2rem}
+.hero-logo-img{height:72px;width:auto;object-fit:contain}
+.hero-logo-text{text-align:left}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,3rem);line-height:1.1;color:var(--brown);letter-spacing:0.05em}
+.hero-title-sub{font-family:'Playfair Display',serif;font-size:clamp(0.9rem,2vw,1.2rem);color:var(--light);letter-spacing:0.15em}
+
+.hero-subtitle{font-family:'Playfair Display',serif;font-size:clamp(0.9rem,2.5vw,1.2rem);color:var(--mid);font-style:italic;margin-bottom:1.5rem}
+.hero-divider{width:40px;height:1px;background:var(--light);margin:0 auto 1.5rem}
 .hero-desc{font-size:0.88rem;line-height:1.9;color:var(--muted);letter-spacing:0.05em;margin-bottom:2.5rem}
 .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-primary{padding:0.75rem 2rem;background:var(--brown);color:var(--cream);font-size:0.78rem;letter-spacing:0.15em;border:none;cursor:pointer;transition:background 0.2s}
-.btn-outline{padding:0.75rem 2rem;background:transparent;color:var(--brown);font-size:0.78rem;letter-spacing:0.15em;border:1px solid var(--brown);cursor:pointer;transition:all 0.2s}
+.btn-primary{padding:0.75rem 2rem;background:var(--brown);color:var(--cream);font-size:0.78rem;letter-spacing:0.15em;border:none;cursor:pointer;transition:background 0.2s;font-family:'Noto Sans TC',sans-serif}
+.btn-outline{padding:0.75rem 2rem;background:transparent;color:var(--brown);font-size:0.78rem;letter-spacing:0.15em;border:1px solid var(--brown);cursor:pointer;transition:all 0.2s;font-family:'Noto Sans TC',sans-serif}
 .btn-primary:hover{background:var(--mid)}
 .btn-outline:hover{background:var(--brown);color:var(--cream)}
 .hero-img{margin-top:3rem;width:100%;max-width:500px;height:300px;background:var(--sand);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.8rem;letter-spacing:0.1em;border:1px solid rgba(61,43,31,0.1);overflow:hidden}
@@ -78,19 +87,10 @@ section{scroll-margin-top:64px}
 .menu-section{display:none}
 .menu-section.active{display:block}
 
+/* 花藝課程 — Coming Soon 簡化版 */
 #courses{background:var(--sand)}
-.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
-.course-card{background:var(--white);border:1px solid rgba(61,43,31,0.08)}
-.course-img{width:100%;height:200px;background:var(--cream);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.78rem;letter-spacing:0.08em;overflow:hidden}
-.course-img img{width:100%;height:100%;object-fit:cover}
-.course-body{padding:1.5rem}
-.course-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--brown);margin-bottom:0.5rem}
-.course-meta{font-size:0.75rem;color:var(--muted);margin-bottom:0.75rem;line-height:1.8}
-.course-price{font-size:0.85rem;color:var(--mid);margin-bottom:1rem}
-.btn-small{display:inline-block;padding:0.55rem 1.3rem;background:var(--brown);color:var(--cream);font-size:0.72rem;letter-spacing:0.12em;border:none;cursor:pointer;transition:background 0.2s;font-family:'Noto Sans TC',sans-serif}
-.btn-small:hover{background:var(--mid)}
-.btn-coming{background:var(--muted);cursor:not-allowed;opacity:0.65}
-.btn-coming:hover{background:var(--muted)}
+.courses-coming{margin-top:0.5rem}
+.courses-coming p{font-size:0.85rem;color:var(--muted);font-style:italic;letter-spacing:0.1em}
 
 #shop{background:var(--white)}
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem}
@@ -116,7 +116,9 @@ section{scroll-margin-top:64px}
 
 footer{background:var(--brown);color:var(--cream);padding:3rem 2rem;text-align:center}
 .footer-inner{max-width:1100px;margin:0 auto}
-.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;letter-spacing:0.2em;margin-bottom:0.5rem}
+.footer-logo-wrap{display:flex;align-items:center;justify-content:center;gap:0.8rem;margin-bottom:0.5rem}
+.footer-logo-img{height:28px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:0.7}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;letter-spacing:0.2em}
 .footer-sub{font-size:0.72rem;letter-spacing:0.15em;opacity:0.5;margin-bottom:1.5rem}
 .footer-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
 .footer-links a{font-size:0.72rem;letter-spacing:0.1em;opacity:0.6;transition:opacity 0.2s}
@@ -128,6 +130,8 @@ footer{background:var(--brown);color:var(--cream);padding:3rem 2rem;text-align:c
   .hamburger{display:flex}
   .about-grid,.contact-grid{grid-template-columns:1fr}
   .about-img{height:260px}
+  .hero-logo-wrap{flex-direction:column;gap:0.8rem}
+  .hero-logo-text{text-align:center}
 }
 </style>
 </head>
@@ -140,7 +144,10 @@ footer{background:var(--brown);color:var(--cream);padding:3rem 2rem;text-align:c
 
 <nav>
   <div class="nav-inner">
-    <a href="#home" class="nav-logo">P.COFFEE ROASTERS</a>
+    <a href="#home" class="nav-logo-wrap">
+      <img id="navLogoImg" class="nav-logo-img" style="display:none" alt="P.COFFEE logo">
+      <span class="nav-logo">P.COFFEE ROASTERS</span>
+    </a>
     <ul class="nav-links">
       <li><a href="#about">關於我們</a></li>
       <li><a href="#menu">菜單</a></li>
@@ -165,7 +172,12 @@ footer{background:var(--brown);color:var(--cream);padding:3rem 2rem;text-align:c
   <div class="hero-bg"><svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"><circle cx="200" cy="150" r="300" fill="#3D2B1F"/><circle cx="1000" cy="600" r="250" fill="#3D2B1F"/></svg></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Specialty Coffee & Floral Studio</p>
-    <h1 class="hero-title">P.COFFEE ROASTERS</h1>
+    <div class="hero-logo-wrap">
+      <img id="heroLogoImg" class="hero-logo-img" style="display:none" alt="P.COFFEE logo">
+      <div class="hero-logo-text">
+        <div class="hero-title">P.COFFEE<br>ROASTERS</div>
+      </div>
+    </div>
     <p class="hero-subtitle" id="heroSlogan"></p>
     <div class="hero-divider"></div>
     <p class="hero-desc" id="heroDesc"></p>
@@ -185,11 +197,7 @@ footer{background:var(--brown);color:var(--cream);padding:3rem 2rem;text-align:c
         <p class="section-label">Our Story</p>
         <h2 class="section-title">關於 P.COFFEE</h2>
         <div class="section-line"></div>
-        <div class="about-text">
-          <p>P.COFFEE ROASTERS 誕生於對咖啡的純粹熱愛，我們相信一杯好咖啡，可以讓忙碌的日常慢下來。</p>
-          <p>店面坐落於台北文山區，藤編椅、木質桌面與自然光，構成了我們獨有的日系文青氛圍。除了自家烘焙的精品咖啡，我們也提供花藝工作坊，邀請你走進花與咖啡香並存的空間。</p>
-          <p>每一批豆子，我們都親自杯測、親自烘焙，只為找到最適合它的曲線。</p>
-        </div>
+        <div class="about-text" id="aboutText"></div>
         <div class="about-tags">
           <span class="tag">自家烘焙</span><span class="tag">精品咖啡</span>
           <span class="tag">花藝工作坊</span><span class="tag">文山區</span><span class="tag">日系風格</span>
@@ -214,7 +222,9 @@ footer{background:var(--brown);color:var(--cream);padding:3rem 2rem;text-align:c
     <p class="section-label">Workshop</p>
     <h2 class="section-title">花藝課程</h2>
     <div class="section-line"></div>
-    <div class="courses-grid" id="coursesGrid"></div>
+    <div class="courses-coming">
+      <p>Coming soon...</p>
+    </div>
   </div>
 </section>
 
@@ -247,7 +257,10 @@ footer{background:var(--brown);color:var(--cream);padding:3rem 2rem;text-align:c
 
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">P.COFFEE ROASTERS</div>
+    <div class="footer-logo-wrap">
+      <img id="footerLogoImg" class="footer-logo-img" style="display:none" alt="P.COFFEE logo">
+      <div class="footer-logo">P.COFFEE ROASTERS</div>
+    </div>
     <div class="footer-sub">Specialty Coffee & Floral Studio · Wenshan, Taipei</div>
     <div class="footer-links">
       <a href="#about">關於我們</a><a href="#menu">菜單</a>
@@ -261,7 +274,6 @@ footer{background:var(--brown);color:var(--cream);padding:3rem 2rem;text-align:c
 const API = "https://sheetdb.io/api/v1/aggloxhcktwxs";
 const SHOP_URL = "https://myship.7-11.com.tw/general/detail/GM2307100861829";
 
-// Google Drive 分享連結自動轉換
 function convertDriveUrl(url) {
   if (!url || url === "（貼上圖片網址）") return null;
   const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
@@ -275,20 +287,27 @@ function imgEl(url, placeholder) {
   return placeholder;
 }
 
+function setLogoImg(id, url) {
+  if (!url) return;
+  const src = convertDriveUrl(url);
+  if (!src) return;
+  const el = document.getElementById(id);
+  if (el) { el.src = src; el.style.display = "block"; }
+}
+
 async function fetchSheet(sheet) {
   const r = await fetch(`${API}?sheet=${sheet}`);
   return r.json();
 }
 
-// 判斷是否為咖啡豆/濾掛商品（點擊導向賣貨便）
 function isOrderable(item) {
   return item.sub.includes("烘焙") || item.name.includes("濾掛");
 }
 
 async function init() {
   try {
-    const [infoRows, menuRows, courseRows, shopRows, imageRows] = await Promise.all([
-      fetchSheet("info"), fetchSheet("menu"), fetchSheet("courses"),
+    const [infoRows, menuRows, shopRows, imageRows] = await Promise.all([
+      fetchSheet("info"), fetchSheet("menu"),
       fetchSheet("shop"), fetchSheet("images"),
     ]);
 
@@ -306,8 +325,24 @@ async function init() {
     document.getElementById("contactTel").textContent = "電話：" + (info.tel || "");
     document.getElementById("contactIg").textContent = "Instagram：" + (info.ig || "");
 
+    // About 文字（可透過 Sheets 編輯）
+    const aboutText = document.getElementById("aboutText");
+    ["about_p1","about_p2","about_p3"].forEach(k => {
+      if (info[k]) {
+        const p = document.createElement("p");
+        p.textContent = info[k];
+        aboutText.appendChild(p);
+      }
+    });
+
+    // Hero 圖片
     document.getElementById("heroImg").innerHTML = imgEl(images.hero, "[ 店內空間照片 ]");
     document.getElementById("aboutImg").innerHTML = imgEl(images.about, "[ 品牌形象照 ]");
+
+    // Logo（若 images 分頁有 logo 欄位）
+    setLogoImg("heroLogoImg", images.logo);
+    setLogoImg("navLogoImg", images.logo);
+    setLogoImg("footerLogoImg", images.logo);
 
     // Menu
     const cats = [...new Set(menuRows.map(r => r.category))];
@@ -341,21 +376,7 @@ async function init() {
       content.appendChild(sec);
     });
 
-    // Courses — Coming Soon
-    const cg = document.getElementById("coursesGrid");
-    courseRows.forEach((c, i) => {
-      cg.innerHTML += `<div class="course-card">
-        <div class="course-img">${imgEl(images["course_" + (i+1)], "[ 課程照片 ]")}</div>
-        <div class="course-body">
-          <div class="course-title">${c.title}</div>
-          <div class="course-meta">📅 ${c.date}<br>⏱ ${c.duration}　👥 ${c.size}</div>
-          <div class="course-price">${c.price} / 人</div>
-          <button class="btn-small btn-coming" disabled>Coming Soon...</button>
-        </div>
-      </div>`;
-    });
-
-    // Shop — 咖啡豆/濾掛點擊導向賣貨便
+    // Shop
     const sg = document.getElementById("shopGrid");
     shopRows.forEach(p => {
       const orderable = isOrderable(p);
